@@ -1,0 +1,376 @@
+@import "tailwindcss";
+
+@theme {
+  /* BlueCrest Brand Colors - ConnectCPA inspired palette */
+  --color-brand-blue: #579cc6;
+  --color-brand-gold: #d69c50;
+  --color-brand-navy: #3e5a81;
+  --color-brand-coral: #d66c4c;
+  --color-brand-dark: #1F2937;
+  --color-brand-light: #F7FAFC;
+
+  /* Extended palette */
+  --color-blue-light: #7ab4d4;
+  --color-blue-dark: #4889b5;
+  --color-gold-light: #e3b574;
+  --color-gold-dark: #c08a3e;
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Typography - Poppins per Brand Guide */
+  --font-family-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing scale */
+  --spacing-section: 5rem;
+  --spacing-section-mobile: 3rem;
+
+  /* Container */
+  --container-max: 1280px;
+
+  /* Shadows - Soft ConnectCPA style */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-soft: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 40px -10px rgba(87, 156, 198, 0.3);
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  color: var(--color-gray-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-gray-900);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-brand-blue);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-brand-blue);
+  color: var(--color-white);
+}
+
+/* Container utility */
+.container-site {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-site {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: var(--spacing-section-mobile);
+  padding-bottom: var(--spacing-section-mobile);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+}
+
+/* Gradient background - ConnectCPA teal style using BlueCrest blue */
+.gradient-blue {
+  background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-blue-dark) 100%);
+}
+
+.gradient-navy {
+  background: linear-gradient(135deg, var(--color-brand-navy) 0%, #2a4a6a 100%);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #E2E8F0, transparent);
+}
+
+/* Star sparkle effect */
+.star-sparkle {
+  color: var(--color-brand-gold);
+  font-size: 24px;
+}
+
+/* Quote mark for testimonials */
+.quote-mark {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background: var(--color-brand-dark);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-family: serif;
+}
+
+/* Browser mockup for case studies */
+.browser-mockup {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.browser-header {
+  background: var(--color-brand-blue);
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.browser-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Button base styles - ConnectCPA inspired */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-blue-dark) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px 0 rgba(87, 156, 198, 0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 20px 0 rgba(87, 156, 198, 0.35);
+  transform: scale(1.02);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--color-brand-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px 0 rgba(214, 156, 80, 0.25);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 6px 20px 0 rgba(214, 156, 80, 0.35);
+  transform: scale(1.02);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--color-gray-300);
+  color: var(--color-gray-700);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-brand-blue);
+  color: var(--color-brand-blue);
+}
+
+/* Card styles - ConnectCPA inspired with soft shadows */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+}
+
+/* Service card with gradient backgrounds */
+.service-card {
+  background: linear-gradient(to bottom right, var(--color-gray-50), white);
+  border-radius: var(--radius-3xl);
+  padding: 2rem;
+  border: 1px solid var(--color-gray-100);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Rich text content styles */
+.prose h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-brand-navy);
+}
+
+.prose h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-gray-800);
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose ul li {
+  margin-bottom: 0.5rem;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+/* Floating animations for hero section */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 3.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* Form input styles - ConnectCPA inspired */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-brand-blue);
+  box-shadow: 0 0 0 3px rgba(87, 156, 198, 0.1);
+}
+
+/* Testimonial card styles */
+.testimonial-card {
+  background: white;
+  border-radius: var(--radius-3xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  padding-top: 5rem;
+  margin-top: 3rem;
+}
+
+.testimonial-avatar {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Newsletter form card */
+.newsletter-card {
+  background: white;
+  border-radius: var(--radius-2xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+}
+
+/* Footer contact card */
+.footer-contact-card {
+  background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-blue-dark) 100%);
+  border-radius: var(--radius-3xl);
+  padding: 2.5rem;
+  color: white;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
