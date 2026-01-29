@@ -43,8 +43,8 @@ export default function ContactPage() {
             <span className="inline-block text-[var(--color-brand-gold)] font-semibold text-sm tracking-wide uppercase mb-4">
               Get in Touch
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Let&apos;s Start a{" "}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="!text-white">Let&apos;s Start a</span>{" "}
               <span className="text-[var(--color-brand-gold)]">Conversation</span>
             </h1>
             <p className="text-xl text-gray-100 leading-relaxed">

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { services, serviceCategories } from "@/data/services";
 import { getServiceIcon } from "@/utils/service-icons";
@@ -15,7 +16,17 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/images/bluecrest-group-services-orange-county-ca.jpg"
+            alt="BlueCrest Group financial services in Orange County, CA"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70"></div>
+        </div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
