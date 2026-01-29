@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site-config";
-import { services } from "@/data/services";
+import { serviceCategories } from "@/data/services";
 import { locations } from "@/data/locations";
 
 export default function Header() {
@@ -12,6 +13,7 @@ export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [locationsOpen, setLocationsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const locationsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -63,8 +65,27 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const topServices = services.slice(0, 8);
   const topLocations = locations.slice(0, 8);
+
+  const handleCategoryClick = (categoryId: string, e: React.MouseEvent) => {
+    setServicesOpen(false);
+    if (pathname === "/services") {
+      // If already on services page, prevent default and scroll
+      e.preventDefault();
+      const element = document.getElementById(categoryId);
+      if (element) {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+    // If not on services page, let the Link handle navigation
+    // The ServicesCategorySection component will handle scrolling after navigation
+  };
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/90 backdrop-blur-md"} border-b border-gray-100`}>
@@ -133,14 +154,14 @@ export default function Header() {
                     </span>
                   </div>
                   <div className="py-2">
-                    {topServices.map((service) => (
+                    {serviceCategories.map((category) => (
                       <Link
-                        key={service.slug}
-                        href={`/services/${service.slug}`}
+                        key={category.id}
+                        href={`/services#${category.id}`}
+                        onClick={(e) => handleCategoryClick(category.id, e)}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[var(--color-brand-blue)] transition-colors"
-                        onClick={() => setServicesOpen(false)}
                       >
-                        {service.name}
+                        {category.name}
                       </Link>
                     ))}
                   </div>
@@ -150,7 +171,7 @@ export default function Header() {
                       className="text-sm font-semibold text-[var(--color-brand-blue)] hover:underline"
                       onClick={() => setServicesOpen(false)}
                     >
-                      View All {services.length} Services
+                      View All Services
                     </Link>
                   </div>
                 </div>
@@ -285,14 +306,17 @@ export default function Header() {
               <div className="py-3 border-b border-gray-100">
                 <div className="font-semibold text-gray-900 mb-2">Services</div>
                 <div className="pl-4 flex flex-col gap-2">
-                  {topServices.slice(0, 5).map((service) => (
+                  {serviceCategories.map((category) => (
                     <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
+                      key={category.id}
+                      href={`/services#${category.id}`}
+                      onClick={(e) => {
+                        setMobileMenuOpen(false);
+                        handleCategoryClick(category.id, e);
+                      }}
                       className="text-gray-600 hover:text-[var(--color-brand-blue)]"
-                      onClick={() => setMobileMenuOpen(false)}
                     >
-                      {service.name}
+                      {category.name}
                     </Link>
                   ))}
                   <Link

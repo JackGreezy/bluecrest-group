@@ -3,6 +3,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 import { services, serviceCategories } from "@/data/services";
 import { getServiceIcon } from "@/utils/service-icons";
+import ServicesCategorySection from "@/components/ServicesCategorySection";
 
 export const metadata: Metadata = {
   title: `Financial Services | Fractional CFO and Accounting`,
@@ -47,13 +48,14 @@ export default function ServicesPage() {
       </section>
 
       {/* Services by Category */}
-      <section className="py-20 lg:py-28">
-        <div className="container-site">
-          {serviceCategories.map((category, categoryIndex) => {
+      <ServicesCategorySection>
+        <section className="py-20 lg:py-28">
+          <div className="container-site">
+            {serviceCategories.map((category, categoryIndex) => {
             const categoryServices = services.filter((s) => s.category === category.id);
 
             return (
-              <div key={category.id} className="mb-20 last:mb-0">
+              <div key={category.id} id={category.id} className="mb-20 last:mb-0 scroll-mt-24">
                 <div className="mb-10">
                   <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-3">
                     {categoryIndex === 0 ? "Strategic Leadership" : categoryIndex === 1 ? "Core Services" : "Specialized Support"}
@@ -88,8 +90,9 @@ export default function ServicesPage() {
               </div>
             );
           })}
-        </div>
-      </section>
+          </div>
+        </section>
+      </ServicesCategorySection>
 
       {/* Why Choose Our Services */}
       <section className="py-20 lg:py-28 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-white relative overflow-hidden">
@@ -100,7 +103,7 @@ export default function ServicesPage() {
             <span className="inline-block text-[var(--color-blue-light)] font-semibold text-sm tracking-wide uppercase mb-4">
               Why Choose Us
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold !text-white mb-6">
               The BlueCrest Approach
             </h2>
             <p className="text-xl text-gray-400">

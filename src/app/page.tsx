@@ -1,14 +1,34 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { services, serviceCategories, getServicesByCategory } from "@/data/services";
-import { getLocationsByPopulation, getLocationImagePath } from "@/data/locations";
+import { getLocationsByPopulation, getLocationImagePath, getLocationBySlug, locations } from "@/data/locations";
 import { getServiceIcon } from "@/utils/service-icons";
 import ContactForm from "@/components/ContactForm";
 
 export default function HomePage() {
+  const [showMoreLocations, setShowMoreLocations] = useState(false);
+  
+  const initialLocationSlugs = [
+    "newport-beach-ca",
+    "corona-del-mar-ca",
+    "irvine-ca",
+    "costa-mesa-ca",
+    "huntington-beach-ca",
+    "laguna-beach-ca",
+  ];
+  
+  const initialLocations = initialLocationSlugs
+    .map((slug) => getLocationBySlug(slug))
+    .filter(Boolean);
+  
+  const remainingLocations = locations.filter(
+    (location) => !initialLocationSlugs.includes(location.slug)
+  );
+  
   const scrollToCategory = (categoryId: string) => {
     const element = document.getElementById(`category-${categoryId}`);
     if (element) {
@@ -477,8 +497,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {getLocationsByPopulation(8).map((location) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {initialLocations.map((location) => (
               <Link
                 key={location.slug}
                 href={`/service-areas/${location.slug}`}
@@ -490,7 +510,7 @@ export default function HomePage() {
                     alt={`${location.name}, ${location.stateAbbr}`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   {location.isPrimary && (
                     <span className="absolute top-3 right-3 bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -510,16 +530,56 @@ export default function HomePage() {
             ))}
           </div>
 
+          {showMoreLocations && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 animate-in fade-in duration-300">
+              {remainingLocations.map((location) => (
+                <Link
+                  key={location.slug}
+                  href={`/service-areas/${location.slug}`}
+                  className="group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-soft hover:shadow-lg hover:border-[var(--color-brand-blue)]/30 transition-all"
+                >
+                  <div className="relative h-40 w-full overflow-hidden">
+                    <Image
+                      src={getLocationImagePath(location)}
+                      alt={`${location.name}, ${location.stateAbbr}`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    {location.isPrimary && (
+                      <span className="absolute top-3 right-3 bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white text-xs font-bold px-2 py-1 rounded-full">
+                        HQ
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-[var(--color-brand-blue)] transition-colors mb-2">
+                      {location.name}
+                    </h3>
+                    <p className="text-gray-600 text-sm line-clamp-2">
+                      {location.shortDescription}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
           <div className="text-center">
-            <Link
-              href="/service-areas"
+            <button
+              onClick={() => setShowMoreLocations(!showMoreLocations)}
               className="inline-flex items-center text-[var(--color-brand-gold)] font-semibold hover:gap-3 transition-all gap-2"
             >
-              View All Service Areas
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              {showMoreLocations ? "Show Less Locations" : "Show More Locations"}
+              <svg 
+                className={`w-5 h-5 transition-transform duration-300 ${showMoreLocations ? 'rotate-180' : ''}`}
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </Link>
+            </button>
           </div>
         </div>
       </section>
