@@ -13,7 +13,7 @@ export const siteConfig = {
   // Contact
   phone: "949-628-6123",
   phoneRaw: "9496286123",
-  email: "jmiller@bluecrest-group.com",
+  email: "info@bluecrest-group.com",
   website: "www.bluecrest-group.com",
 
   // Founder

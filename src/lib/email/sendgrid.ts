@@ -70,7 +70,7 @@ export async function sendCustomerConfirmation(brand: BrandData, lead: Lead) {
     return;
   }
 
-  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrest-group.com';
   const fromName = process.env.SENDGRID_FROM_NAME || brand.company_name;
   const replyTo = process.env.SENDGRID_REPLY_TO || fromEmail;
   
@@ -104,12 +104,12 @@ export async function sendInternalNotifications(brand: BrandData, lead: Lead) {
     return;
   }
 
-  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrest-group.com';
   const fromName = process.env.SENDGRID_FROM_NAME || brand.company_name;
   const replyTo = process.env.SENDGRID_REPLY_TO || fromEmail;
   const recipients = [
-    'jmiller@bluecrest-group.com',
     'jack@sitereviver.com',
+    'info@bluecrest-group.com',
   ].filter(Boolean) as string[];
 
   if (recipients.length === 0) {

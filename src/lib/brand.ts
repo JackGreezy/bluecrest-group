@@ -13,7 +13,7 @@ export function getBrand() {
     subject: "We received your CFO services inquiry",
     preheader: "Thank you for your interest in BlueCrest Group's fractional CFO services. We have received your request and will contact you within 24 hours.",
     company_name: 'BlueCrest Group',
-    logo_url: 'https://bluecrestgroup.com/images/bluecrest-group-logo.png',
+    logo_url: 'https://bluecrest-group.com/images/bluecrest-group-logo.png',
     city_state: "Orange County, CA",
     brand_accent: COLORS.primary,
     brand_gold: COLORS.gold,
@@ -36,7 +36,7 @@ export function getBrand() {
     call_phone: "949-628-6123",
     call_phone_plain: "19496286123",
     site_cta_label: "Visit Website",
-    site_url: "https://bluecrestgroup.com",
+    site_url: "https://bluecrest-group.com",
 
     // Address and footer
     address_line: "Orange County, California",
@@ -47,9 +47,9 @@ export function getBrand() {
     brand_tagline: 'Strategic CFO Services for Growing Businesses',
     brand_dark_bg: COLORS.dark,
     supportPhone: '949-628-6123',
-    supportEmail: 'info@bluecrestgroup.com',
+    supportEmail: 'info@bluecrest-group.com',
     service_area: 'Serving Orange County and Southern California',
-    portfolio_url: 'https://bluecrestgroup.com/about',
+    portfolio_url: 'https://bluecrest-group.com/about',
     portfolio_blurb: 'Strategic financial leadership for growing businesses.',
     intro_copy: 'Delivering expert financial guidance and CFO services to help your business grow and thrive.',
   };

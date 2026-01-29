@@ -50,15 +50,31 @@ export async function POST(request: Request) {
       })
     };
 
+    // Send emails via SendGrid
+    // Send customer confirmation first, then internal notifications
+    let emailErrors: unknown[] = [];
+    
     try {
-      await Promise.all([
-        sendCustomerConfirmation(brandWithDate, lead),
-        sendInternalNotifications(brandWithDate, lead),
-      ]);
-      console.log('SendGrid emails sent successfully to:', email);
+      await sendCustomerConfirmation(brandWithDate, lead);
+      console.log('Customer confirmation email sent successfully to:', email);
     } catch (error) {
-      console.error("SendGrid email failed", error);
-      // Continue without blocking UX - form still submitted successfully
+      console.error("Failed to send customer confirmation email:", error);
+      emailErrors.push(error);
+      // Don't throw - we still want to try sending internal notifications
+    }
+
+    try {
+      await sendInternalNotifications(brandWithDate, lead);
+      console.log('Internal notification emails sent successfully');
+    } catch (error) {
+      console.error("Failed to send internal notification emails:", error);
+      emailErrors.push(error);
+      // Don't throw - form submission should still succeed
+    }
+
+    // Log if any emails failed, but don't block form submission
+    if (emailErrors.length > 0) {
+      console.warn(`Form submitted but ${emailErrors.length} email(s) failed to send. Check SendGrid configuration.`);
     }
 
     return NextResponse.json(
