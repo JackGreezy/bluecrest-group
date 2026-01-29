@@ -42,11 +42,20 @@ export const metadata: Metadata = {
     siteName: siteConfig.businessName,
     title: `${siteConfig.businessName} | Fractional CFO Services`,
     description: `Expert fractional CFO and accounting services for growing businesses in ${siteConfig.city}, ${siteConfig.stateAbbr}.`,
+    images: [
+      {
+        url: "/images/Orange-County-CA-fractional-cfo.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.businessName} - Fractional CFO Services in Orange County, CA`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.businessName,
     description: `Fractional CFO and accounting services in ${siteConfig.city}, ${siteConfig.stateAbbr}.`,
+    images: ["/images/Orange-County-CA-fractional-cfo.jpg"],
   },
   robots: {
     index: true,
