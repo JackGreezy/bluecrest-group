@@ -11,8 +11,8 @@ export const siteConfig = {
   region: "Orange County",
 
   // Contact
-  phone: "(949) 698-0381",
-  phoneRaw: "9496980381",
+  phone: "949-628-6123",
+  phoneRaw: "9496286123",
   email: "jmiller@bluecrest-group.com",
   website: "www.bluecrest-group.com",
 
