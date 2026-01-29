@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { client, featuredArticlesQuery, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 
 interface Article {
   _id: string;
@@ -15,18 +17,12 @@ interface Article {
   category?: string;
 }
 
-async function getFeaturedArticles(): Promise<Article[]> {
-  try {
-    const articles = await client.fetch<Article[]>(featuredArticlesQuery);
-    return articles || [];
-  } catch (error) {
-    console.error("Failed to fetch featured articles", error);
-    return [];
-  }
+interface FeaturedInsightsProps {
+  articles: Article[];
 }
 
-export default async function FeaturedInsights() {
-  const featuredArticles = await getFeaturedArticles();
+export default function FeaturedInsights({ articles }: FeaturedInsightsProps) {
+  const featuredArticles = articles;
   return (
     <>
       {featuredArticles.length > 0 && (
