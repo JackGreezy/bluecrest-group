@@ -85,10 +85,13 @@ export async function sendCustomerConfirmation(brand: BrandData, lead: Lead) {
   try {
     await sgMail.send(msg);
     console.log('Customer confirmation email sent to:', lead.email);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Failed to send customer confirmation email:', error);
-    if (error.response) {
-      console.error('SendGrid error details:', JSON.stringify(error.response.body, null, 2));
+    if (error && typeof error === 'object' && 'response' in error) {
+      const sendGridError = error as { response?: { body?: unknown } };
+      if (sendGridError.response?.body) {
+        console.error('SendGrid error details:', JSON.stringify(sendGridError.response.body, null, 2));
+      }
     }
     throw error;
   }
@@ -127,10 +130,13 @@ export async function sendInternalNotifications(brand: BrandData, lead: Lead) {
   try {
     await Promise.all(sends);
     console.log('Internal notification emails sent to:', recipients.join(', '));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Failed to send internal notification emails:', error);
-    if (error.response) {
-      console.error('SendGrid error details:', JSON.stringify(error.response.body, null, 2));
+    if (error && typeof error === 'object' && 'response' in error) {
+      const sendGridError = error as { response?: { body?: unknown } };
+      if (sendGridError.response?.body) {
+        console.error('SendGrid error details:', JSON.stringify(sendGridError.response.body, null, 2));
+      }
     }
     throw error;
   }
