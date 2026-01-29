@@ -222,7 +222,7 @@ export default function ContactPage() {
           </div>
           <div className="rounded-3xl overflow-hidden shadow-xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106023.95850455836!2d-117.95!3d33.62!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcdd0e689140e3%3A0xa77ab575604a68d0!2sNewport%20Beach%2C%20CA!5e0!3m2!1sen!2sus!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212270.28414308854!2d-117.7803964!3d33.640814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc925c54d5f7cf%3A0xdea6c3618ff0d607!2sOrange%20County%2C%20CA!5e0!3m2!1sen!2sus!4v1738182400000!5m2!1sen!2sus"
               width="100%"
               height="450"
               style={{ border: 0 }}

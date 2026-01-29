@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { services, serviceCategories, getServicesByCategory } from "@/data/services";
-import { getLocationsByPopulation, getLocationImagePath, getLocationBySlug, locations } from "@/data/locations";
+import { getLocationImagePath, getLocationBySlug, locations } from "@/data/locations";
 import { getServiceIcon } from "@/utils/service-icons";
 import ContactForm from "@/components/ContactForm";
+import FeaturedInsights from "@/components/FeaturedInsights";
 
 export default function HomePage() {
   const [showMoreLocations, setShowMoreLocations] = useState(false);
@@ -23,7 +24,7 @@ export default function HomePage() {
   
   const initialLocations = initialLocationSlugs
     .map((slug) => getLocationBySlug(slug))
-    .filter(Boolean);
+    .filter((location): location is NonNullable<typeof location> => Boolean(location));
   
   const remainingLocations = locations.filter(
     (location) => !initialLocationSlugs.includes(location.slug)
@@ -414,8 +415,7 @@ export default function HomePage() {
                 </p>
               </div>
               <p className="text-gray-600 text-center leading-relaxed text-sm">
-                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase
-                the value you provide to growing businesses.&rdquo;
+                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase the value you provide to growing businesses.&rdquo;
               </p>
             </div>
 
@@ -443,8 +443,7 @@ export default function HomePage() {
                 </p>
               </div>
               <p className="text-gray-600 text-center leading-relaxed text-sm">
-                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase
-                the value you provide to growing businesses.&rdquo;
+                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase the value you provide to growing businesses.&rdquo;
               </p>
             </div>
 
@@ -472,13 +471,15 @@ export default function HomePage() {
                 </p>
               </div>
               <p className="text-gray-600 text-center leading-relaxed text-sm">
-                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase
-                the value you provide to growing businesses.&rdquo;
+                &ldquo;Testimonial placeholder - Add your client testimonials here to showcase the value you provide to growing businesses.&rdquo;
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Insights Section */}
+      <FeaturedInsights />
 
       {/* Service Areas */}
       <section className="py-20 bg-white">
@@ -493,7 +494,7 @@ export default function HomePage() {
               Serving {siteConfig.region}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Southern California's Fractional Path to Financial Clarity & Strategic Growth
+              Southern California&apos;s Fractional Path to Financial Clarity & Strategic Growth
             </p>
           </div>
 

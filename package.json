@@ -6,12 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "studio": "cd sanity && sanity dev",
+    "studio:deploy": "cd sanity && sanity deploy"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.2",
+    "@sanity/client": "^7.14.1",
+    "@sanity/image-url": "^2.0.3",
+    "@sanity/vision": "^5.7.0",
+    "@sendgrid/mail": "^8.1.6",
     "next": "^15.1.6",
+    "next-sanity": "^12.0.16",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^5.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

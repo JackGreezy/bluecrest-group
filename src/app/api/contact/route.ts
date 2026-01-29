@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getBrand } from "@/lib/brand";
+import { sendCustomerConfirmation, sendInternalNotifications } from "@/lib/email/sendgrid";
 
 export async function POST(request: Request) {
   try {
@@ -14,8 +16,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Integrate with email service (SendGrid, Resend, etc.)
-    // For now, log the submission
     console.log("Contact form submission:", {
       name,
       company,
@@ -27,10 +27,39 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     });
 
-    // In production, you would:
-    // 1. Send email notification to the business
-    // 2. Optionally send confirmation email to the submitter
-    // 3. Store in a database or CRM
+    // Send emails via SendGrid
+    const brand = getBrand();
+    const lead = {
+      name: String(name),
+      email: String(email),
+      phone: phone ? String(phone).replace(/\D/g, '') : undefined,
+      phone_plain: phone ? String(phone).replace(/\D/g, '') : undefined,
+      company: company ? String(company) : undefined,
+      projectType: String(projectType),
+      timeline: timeline ? String(timeline) : undefined,
+      projectDescription: details ? String(details) : undefined,
+    };
+
+    // Add submitted_date to brand data
+    const brandWithDate = {
+      ...brand,
+      submitted_date: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    };
+
+    try {
+      await Promise.all([
+        sendCustomerConfirmation(brandWithDate, lead),
+        sendInternalNotifications(brandWithDate, lead),
+      ]);
+      console.log('SendGrid emails sent successfully to:', email);
+    } catch (error) {
+      console.error("SendGrid email failed", error);
+      // Continue without blocking UX - form still submitted successfully
+    }
 
     return NextResponse.json(
       { message: "Form submitted successfully" },

@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { locations } from "@/data/locations";
+import { client, articleSlugsQuery } from "@/lib/sanity";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.bluecrest-group.com";
 
   // Static pages
@@ -37,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/insights`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
   ];
 
   // Service pages
@@ -55,5 +62,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...servicePages, ...locationPages];
+  // Insights pages  
+  let insightsPages: MetadataRoute.Sitemap = [];
+  try {
+    // Only fetch if Sanity is configured
+    if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+      const articles = await client.fetch<{ slug: string }[]>(articleSlugsQuery);
+      insightsPages = articles.map((article) => ({
+        url: `${baseUrl}/insights/${article.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }));
+    }
+  } catch (error) {
+    console.error("Failed to fetch articles for sitemap", error);
+  }
+
+  return [...staticPages, ...servicePages, ...locationPages, ...insightsPages];
 }
