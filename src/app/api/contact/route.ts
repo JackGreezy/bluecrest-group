@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
     // Send emails via SendGrid
     // Send customer confirmation first, then internal notifications
-    let emailErrors: unknown[] = [];
+    const emailErrors: unknown[] = [];
     
     try {
       await sendCustomerConfirmation(brandWithDate, lead);
