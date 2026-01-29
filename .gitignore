@@ -7,6 +7,12 @@ node_modules
 out
 build
 
+# Sanity Studio (local)
+sanity/node_modules
+sanity/.sanity
+sanity/dist
+sanity/.turbo
+
 # Production
 dist
 
