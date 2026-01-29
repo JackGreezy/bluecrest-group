@@ -45,12 +45,9 @@ export default function HomePage() {
               <span className="w-12 h-0.5 bg-[var(--color-brand-gold)]"></span>
               <span className="text-[var(--color-brand-gold)] font-semibold text-sm uppercase tracking-wider">Fractional CFO Services</span>
             </div>
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-[var(--color-brand-navy)] leading-tight mb-6 drop-shadow-lg">
-              Financial Leadership
+            <h1 className="text-5xl lg:text-6xl font-extrabold text-[var(--color-brand-navy)] leading-tight mb-8 drop-shadow-lg">
+              Clarity & Growth — Without the Full-Time Overhead
             </h1>
-            <h2 className="text-3xl lg:text-4xl font-semibold text-[var(--color-brand-blue)] mb-8 drop-shadow-lg">
-              Strategic. Human-Led. Fully Yours.
-            </h2>
             <p className="text-lg text-gray-700 mb-10 leading-relaxed drop-shadow-md font-medium">
               Scale your business with strategic CFO services and expert accounting support.
               From bookkeeping and payroll to financial modeling, tax strategy, and more –
@@ -476,7 +473,7 @@ export default function HomePage() {
               Serving {siteConfig.region}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We proudly serve businesses throughout Southern California with local expertise and strategic perspective.
+              Southern California's Fractional Path to Financial Clarity & Strategic Growth
             </p>
           </div>
 

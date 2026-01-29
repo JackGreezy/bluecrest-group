@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { services } from "@/data/services";
-import { locations } from "@/data/locations";
+import { locations, getLocationsByPopulation } from "@/data/locations";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const topServices = services.slice(0, 6);
-  const topLocations = locations.slice(0, 6);
+  const allServices = services;
+  const allLocations = getLocationsByPopulation();
 
   return (
     <footer className="bg-white pt-20 pb-0">
@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Footer Links */}
+            {/* Footer Links and Content */}
             <div className="lg:col-span-8 text-white pt-8">
               <Link
                 href="/contact"
@@ -111,72 +111,77 @@ export default function Footer() {
                 </svg>
               </Link>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 border-t border-white/10 pt-8">
-                {/* Column 1 - Company */}
-                <div>
-                  <Link href="/" className="block mb-4 hover:text-[var(--color-brand-blue)] transition-colors">
+              {/* Company Links */}
+              <div className="mb-12 border-b border-white/10 pb-8">
+                <div className="flex flex-wrap gap-6">
+                  <Link href="/" className="text-gray-300 hover:text-[var(--color-brand-blue)] transition-colors font-medium">
                     Home
                   </Link>
-                  <Link href="/about" className="block mb-4 hover:text-[var(--color-brand-blue)] transition-colors">
+                  <Link href="/about" className="text-gray-300 hover:text-[var(--color-brand-blue)] transition-colors font-medium">
                     About
                   </Link>
-                  <Link href="/contact" className="block hover:text-[var(--color-brand-blue)] transition-colors">
+                  <Link href="/contact" className="text-gray-300 hover:text-[var(--color-brand-blue)] transition-colors font-medium">
                     Contact
                   </Link>
-                </div>
-
-                {/* Column 2 - Services */}
-                <div>
-                  <h4 className="font-semibold mb-4 text-[var(--color-brand-gold)]">Services</h4>
-                  {topServices.slice(0, 3).map((service) => (
-                    <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      className="block mb-3 text-gray-400 hover:text-[var(--color-brand-blue)] transition-colors text-sm"
-                    >
-                      {service.name}
-                    </Link>
-                  ))}
-                  <Link
-                    href="/services"
-                    className="text-[var(--color-brand-blue)] text-sm font-medium hover:underline"
-                  >
-                    View All
+                  <Link href="/services" className="text-gray-300 hover:text-[var(--color-brand-blue)] transition-colors font-medium">
+                    Services
+                  </Link>
+                  <Link href="/service-areas" className="text-gray-300 hover:text-[var(--color-brand-blue)] transition-colors font-medium">
+                    Service Areas
                   </Link>
                 </div>
+              </div>
 
-                {/* Column 3 - More Services */}
-                <div>
-                  <h4 className="font-semibold mb-4 text-[var(--color-brand-gold)]">More Services</h4>
-                  {topServices.slice(3, 6).map((service) => (
+              {/* All Services */}
+              <div className="mb-12 border-b border-white/10 pb-8">
+                <h4 className="font-semibold mb-6 text-[var(--color-brand-gold)] text-lg">All Services</h4>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
+                  {allServices.map((service) => (
                     <Link
                       key={service.slug}
                       href={`/services/${service.slug}`}
-                      className="block mb-3 text-gray-400 hover:text-[var(--color-brand-blue)] transition-colors text-sm"
+                      className="text-gray-400 hover:text-[var(--color-brand-blue)] transition-colors text-sm"
                     >
                       {service.name}
                     </Link>
                   ))}
                 </div>
+              </div>
 
-                {/* Column 4 - Service Areas */}
+              {/* All Locations and Map */}
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* All Locations */}
                 <div>
-                  <h4 className="font-semibold mb-4 text-[var(--color-brand-gold)]">Service Areas</h4>
-                  {topLocations.slice(0, 3).map((location) => (
-                    <Link
-                      key={location.slug}
-                      href={`/service-areas/${location.slug}`}
-                      className="block mb-3 text-gray-400 hover:text-[var(--color-brand-blue)] transition-colors text-sm"
-                    >
-                      {location.name}
-                    </Link>
-                  ))}
-                  <Link
-                    href="/service-areas"
-                    className="text-[var(--color-brand-blue)] text-sm font-medium hover:underline"
-                  >
-                    View All Areas
-                  </Link>
+                  <h4 className="font-semibold mb-6 text-[var(--color-brand-gold)] text-lg">Service Areas</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
+                    {allLocations.map((location) => (
+                      <Link
+                        key={location.slug}
+                        href={`/service-areas/${location.slug}`}
+                        className="text-gray-400 hover:text-[var(--color-brand-blue)] transition-colors text-sm"
+                      >
+                        {location.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Google Maps Embed */}
+                <div>
+                  <h4 className="font-semibold mb-6 text-[var(--color-brand-gold)] text-lg">Our Service Area</h4>
+                  <div className="rounded-xl overflow-hidden shadow-lg border border-white/10">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106023.95850455836!2d-117.95!3d33.62!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcdd0e689140e3%3A0xa77ab575604a68d0!2sNewport%20Beach%2C%20CA!5e0!3m2!1sen!2sus!4v1"
+                      width="100%"
+                      height="300"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Orange County Service Area"
+                      className="w-full"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

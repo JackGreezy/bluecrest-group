@@ -156,6 +156,18 @@ export const locations: Location[] = [
     isPrimary: false,
     population: 85000,
   },
+  {
+    id: 13,
+    slug: "corona-del-mar-ca",
+    name: "Corona del Mar",
+    city: "Corona del Mar",
+    county: "Orange County",
+    state: "California",
+    stateAbbr: "CA",
+    shortDescription: "Premium fractional CFO services for Corona del Mar businesses and high-net-worth enterprises.",
+    isPrimary: false,
+    population: 12000,
+  },
 ];
 
 export function getLocationBySlug(slug: string): Location | undefined {
@@ -189,6 +201,7 @@ const locationImageExtensions: Record<string, string> = {
   "tustin-ca": "avif",
   "mission-viejo-ca": "avif",
   "lake-forest-ca": "jpg",
+  "corona-del-mar-ca": "jpg",
 };
 
 export function getLocationImagePath(location: Location): string {

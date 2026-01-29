@@ -690,6 +690,89 @@ Anaheim's scale and diversity create opportunities for businesses of all types. 
       },
     ],
   },
+
+  "corona-del-mar-ca": {
+    slug: "corona-del-mar-ca",
+    mainIntroduction: `Corona del Mar represents the pinnacle of Orange County coastal living and business sophistication. This exclusive Newport Beach neighborhood attracts successful entrepreneurs, established professionals, and high-net-worth individuals who demand exceptional service from their financial advisors. BlueCrest Group provides premium fractional CFO, accounting, and business advisory services tailored to Corona del Mar's discerning business community.
+
+Our Corona del Mar clients include luxury service providers, real estate professionals, investment firms, and successful entrepreneurs who value discretion, expertise, and strategic financial guidance. We understand the unique dynamics of serving businesses in one of California's most affluent communities, where expectations for professional service are exceptionally high.`,
+
+    businessEnvironment: {
+      heading: "Corona del Mar Business Environment",
+      content: "Corona del Mar combines stunning coastal beauty with a sophisticated business environment. The community attracts successful professionals and entrepreneurs who appreciate both the lifestyle and the business opportunities available in this exclusive enclave. Local businesses range from boutique professional services firms to real estate enterprises, investment advisors, and luxury service providers. The business community values quality, discretion, and strategic thinking—qualities that define our approach to financial services.",
+    },
+
+    servicesOverview: {
+      heading: "Financial Services for Corona del Mar Businesses",
+      intro: "We provide premium financial leadership and support tailored to Corona del Mar's sophisticated business community.",
+      highlights: [
+        {
+          service: "Fractional CFO Services",
+          description: "Strategic financial leadership for high-growth businesses and established enterprises seeking executive-level guidance.",
+        },
+        {
+          service: "Wealth Management Support",
+          description: "Financial planning and advisory services for business owners managing personal and business wealth.",
+        },
+        {
+          service: "Real Estate Financial Services",
+          description: "Specialized accounting and financial management for real estate professionals and property investment firms.",
+        },
+        {
+          service: "Tax Strategy and Planning",
+          description: "Proactive tax planning and optimization for high-net-worth individuals and successful business owners.",
+        },
+        {
+          service: "Business Valuation and Exit Planning",
+          description: "Strategic guidance for business owners planning transitions, sales, or generational transfers.",
+        },
+      ],
+    },
+
+    whyLocalMatters: {
+      heading: "Understanding Corona del Mar Business Dynamics",
+      content: "Corona del Mar businesses operate in an environment where excellence is expected and relationships matter. Having financial partners who understand the local business culture, appreciate the value of discretion, and can navigate complex financial situations is essential. We know the Corona del Mar business community, understand the expectations of successful entrepreneurs and professionals, and recognize the importance of providing service that matches the community's high standards.",
+    },
+
+    industriesServed: {
+      heading: "Industries We Serve in Corona del Mar",
+      intro: "Our Corona del Mar practice serves a range of sophisticated businesses and professional services:",
+      industries: [
+        "Real Estate and Property Investment",
+        "Professional Services and Consulting",
+        "Investment Advisory and Wealth Management",
+        "Luxury Retail and Services",
+        "Healthcare and Medical Practices",
+        "Legal and Financial Services",
+        "Hospitality and Private Clubs",
+        "Technology and Innovation",
+      ],
+    },
+
+    localCommitment: {
+      heading: "Serving Corona del Mar's Business Community",
+      content: "Corona del Mar has earned its reputation as a premier business destination through its combination of location, lifestyle, and business sophistication. We are proud to serve the companies and professionals who contribute to this community's success. Whether you are building a business, managing investments, or planning for the future, we bring the financial expertise and service quality that Corona del Mar businesses expect.",
+    },
+
+    faqs: [
+      {
+        question: "Do you work with high-net-worth individuals in Corona del Mar?",
+        answer: "Yes, we work with successful business owners and professionals who need integrated financial services that address both business and personal financial needs. We understand the complexities of managing wealth across multiple entities and can provide coordinated support.",
+      },
+      {
+        question: "Can you help with real estate investment accounting?",
+        answer: "Real estate is a significant part of the Corona del Mar business community. We provide specialized accounting, financial reporting, and tax services for real estate professionals, property investors, and development companies.",
+      },
+      {
+        question: "Do you offer services for family offices?",
+        answer: "We work with family offices and high-net-worth families who need sophisticated financial management. Our services can be tailored to support family office structures and multi-generational wealth planning.",
+      },
+      {
+        question: "How do you ensure discretion and confidentiality?",
+        answer: "Discretion is fundamental to our practice. We maintain strict confidentiality protocols and understand the importance of privacy for our Corona del Mar clients. All client information is handled with the highest level of security and confidentiality.",
+      },
+    ],
+  },
 };
 
 export function getLocationContent(slug: string): LocationContent | undefined {
