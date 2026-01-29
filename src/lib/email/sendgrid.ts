@@ -2,9 +2,11 @@ import sgMail from '@sendgrid/mail';
 
 if (!process.env.SENDGRID_API_KEY) {
   console.error('Missing SENDGRID_API_KEY environment variable');
-}
-
-if (process.env.SENDGRID_API_KEY) {
+} else {
+  // Validate API key format (SendGrid API keys start with "SG.")
+  if (!process.env.SENDGRID_API_KEY.startsWith('SG.')) {
+    console.warn('SENDGRID_API_KEY does not appear to be in the correct format (should start with "SG.")');
+  }
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
@@ -68,10 +70,14 @@ export async function sendCustomerConfirmation(brand: BrandData, lead: Lead) {
     return;
   }
 
-  const fromEmail = brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromName = process.env.SENDGRID_FROM_NAME || brand.company_name;
+  const replyTo = process.env.SENDGRID_REPLY_TO || fromEmail;
+  
   const msg = {
     to: lead.email,
-    from: { email: fromEmail, name: brand.company_name },
+    from: { email: fromEmail, name: fromName },
+    replyTo: replyTo,
     templateId: SENDGRID_TEMPLATE_ID,
     dynamicTemplateData: { ...brand, lead },
   };
@@ -79,8 +85,11 @@ export async function sendCustomerConfirmation(brand: BrandData, lead: Lead) {
   try {
     await sgMail.send(msg);
     console.log('Customer confirmation email sent to:', lead.email);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send customer confirmation email:', error);
+    if (error.response) {
+      console.error('SendGrid error details:', JSON.stringify(error.response.body, null, 2));
+    }
     throw error;
   }
 }
@@ -92,7 +101,9 @@ export async function sendInternalNotifications(brand: BrandData, lead: Lead) {
     return;
   }
 
-  const fromEmail = brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromEmail = process.env.SENDGRID_FROM_EMAIL || brand.supportEmail || 'info@bluecrestgroup.com';
+  const fromName = process.env.SENDGRID_FROM_NAME || brand.company_name;
+  const replyTo = process.env.SENDGRID_REPLY_TO || fromEmail;
   const recipients = [
     'jmiller@bluecrest-group.com',
     'jack@sitereviver.com',
@@ -106,7 +117,8 @@ export async function sendInternalNotifications(brand: BrandData, lead: Lead) {
   const sends = recipients.map(email =>
     sgMail.send({
       to: email,
-      from: { email: fromEmail, name: brand.company_name },
+      from: { email: fromEmail, name: fromName },
+      replyTo: replyTo,
       templateId: SENDGRID_TEMPLATE_ID,
       dynamicTemplateData: { ...brand, lead },
     })
@@ -115,8 +127,11 @@ export async function sendInternalNotifications(brand: BrandData, lead: Lead) {
   try {
     await Promise.all(sends);
     console.log('Internal notification emails sent to:', recipients.join(', '));
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send internal notification emails:', error);
+    if (error.response) {
+      console.error('SendGrid error details:', JSON.stringify(error.response.body, null, 2));
+    }
     throw error;
   }
 }

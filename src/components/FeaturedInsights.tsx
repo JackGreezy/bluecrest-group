@@ -14,6 +14,7 @@ interface Article {
     [key: string]: unknown;
   };
   publishedAt: string;
+  publishedDateFormatted?: string; // Pre-formatted on server
   category?: string;
 }
 
@@ -60,11 +61,8 @@ export default function FeaturedInsights({ articles }: FeaturedInsightsProps) {
                   ? urlFor(article.mainImage).width(800).height(500).quality(80).format("webp").url()
                   : "/images/Orange-County-CA-fractional-cfo.jpg";
 
-                const publishedDate = new Date(article.publishedAt).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                });
+                // Use pre-formatted date from server to prevent hydration mismatch
+                const publishedDate = article.publishedDateFormatted || "";
 
                 return (
                   <Link
