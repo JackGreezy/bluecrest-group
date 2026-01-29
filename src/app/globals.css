@@ -1,19 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  /* BlueCrest Brand Colors - ConnectCPA inspired palette */
+  /* BlueCrest Brand Colors - Core Palette
+   * Primary Blue (#579cc6): Clarity, stability, confidence - main brand color
+   * Primary Gold (#d69c50): Warmth, approachability, balance - accent & CTAs
+   */
   --color-brand-blue: #579cc6;
   --color-brand-gold: #d69c50;
+
+  /* Accent Palette (use sparingly for emphasis)
+   * Navy (#3e5a81): Depth, professionalism - headings, dark sections
+   * Coral (#d66c4c): Energy, emphasis - sparingly for highlights
+   */
   --color-brand-navy: #3e5a81;
   --color-brand-coral: #d66c4c;
+
+  /* Supporting colors */
   --color-brand-dark: #1F2937;
   --color-brand-light: #F7FAFC;
 
-  /* Extended palette */
+  /* Extended palette - tints and shades */
   --color-blue-light: #7ab4d4;
   --color-blue-dark: #4889b5;
   --color-gold-light: #e3b574;
   --color-gold-dark: #c08a3e;
+  --color-navy-light: #4a6a91;
+  --color-navy-dark: #2d4561;
 
   /* Neutrals */
   --color-white: #ffffff;
@@ -28,9 +40,14 @@
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
 
-  /* Typography - Poppins per Brand Guide */
+  /* Typography - Per Brand Guide:
+   * Headline Font 1: Harabara Mais Demo (min 36pt/43pt)
+   * Subhead Font: Poppins Medium (min 12pt/14pt)
+   * Body Font: Poppins Regular (min 8pt/12pt)
+   */
   --font-family-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
-  --font-family-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: "Harabara Mais Demo", "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-family-subhead: "Poppins", ui-sans-serif, system-ui, sans-serif;
 
   /* Spacing scale */
   --spacing-section: 5rem;
@@ -71,27 +88,58 @@ body {
   overflow-x: hidden;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+/* Typography - Brand Guide Hierarchy
+ * Headlines (h1, h2): Harabara Mais Demo - min 36pt (2.25rem)
+ * Subheads (h3, h4): Poppins Medium - min 12pt (0.75rem)
+ * Body: Poppins Regular
+ */
+
+/* Main headlines - Harabara Mais Demo */
+h1, h2 {
   font-family: var(--font-family-heading);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 400; /* Harabara is a display font, doesn't need heavy weight */
+  line-height: 1.1;
   color: var(--color-gray-900);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 3.75rem);
-  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* 40-64px, meets min 36pt requirement */
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem); /* 32-48px, meets min 36pt requirement */
+}
+
+/* Subheadings - Poppins Medium */
+h3, h4, h5, h6 {
+  font-family: var(--font-family-subhead);
+  font-weight: 500; /* Poppins Medium per brand guide */
+  line-height: 1.3;
+  color: var(--color-gray-900);
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
-  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 1.5rem); /* 20-24px */
+}
+
+/* Override for h3 in dark backgrounds */
+.bg-gradient-to-br h3.text-white,
+.text-white h3 {
+  color: white !important;
+}
+
+h4 {
+  font-size: clamp(1rem, 2vw, 1.25rem); /* 16-20px */
+}
+
+h5 {
+  font-size: 1rem; /* 16px */
+}
+
+h6 {
+  font-size: 0.875rem; /* 14px - min subhead per brand guide */
 }
 
 /* Focus styles for accessibility */
@@ -136,13 +184,34 @@ h3 {
   }
 }
 
-/* Gradient background - ConnectCPA teal style using BlueCrest blue */
+/* Gradient backgrounds - BlueCrest brand palette */
 .gradient-blue {
   background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-blue-dark) 100%);
 }
 
 .gradient-navy {
-  background: linear-gradient(135deg, var(--color-brand-navy) 0%, #2a4a6a 100%);
+  background: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-navy-dark) 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, var(--color-brand-gold) 0%, var(--color-gold-dark) 100%);
+}
+
+/* Gold accent underline */
+.accent-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--color-brand-gold);
+  border-radius: 2px;
 }
 
 /* Section divider */
@@ -196,7 +265,7 @@ h3 {
   background: rgba(255, 255, 255, 0.7);
 }
 
-/* Button base styles - ConnectCPA inspired */
+/* Button base styles - BlueCrest professional */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -210,26 +279,40 @@ h3 {
   text-decoration: none;
 }
 
+/* Primary CTA - Gold (warmth, approachability, action) */
 .btn-primary {
+  background: linear-gradient(135deg, var(--color-brand-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px 0 rgba(214, 156, 80, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 20px 0 rgba(214, 156, 80, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Secondary CTA - Blue (trust, stability) */
+.btn-secondary {
   background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-blue-dark) 100%);
   color: var(--color-white);
   box-shadow: 0 4px 14px 0 rgba(87, 156, 198, 0.25);
 }
 
-.btn-primary:hover {
-  box-shadow: 0 6px 20px 0 rgba(87, 156, 198, 0.35);
-  transform: scale(1.02);
-}
-
-.btn-secondary {
-  background: linear-gradient(135deg, var(--color-brand-gold) 0%, var(--color-gold-dark) 100%);
-  color: var(--color-white);
-  box-shadow: 0 4px 14px 0 rgba(214, 156, 80, 0.25);
-}
-
 .btn-secondary:hover {
-  box-shadow: 0 6px 20px 0 rgba(214, 156, 80, 0.35);
-  transform: scale(1.02);
+  box-shadow: 0 6px 20px 0 rgba(87, 156, 198, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Navy button - for dark emphasis */
+.btn-navy {
+  background: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-navy-dark) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px 0 rgba(62, 90, 129, 0.25);
+}
+
+.btn-navy:hover {
+  box-shadow: 0 6px 20px 0 rgba(62, 90, 129, 0.35);
+  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -239,8 +322,19 @@ h3 {
 }
 
 .btn-outline:hover {
-  border-color: var(--color-brand-blue);
-  color: var(--color-brand-blue);
+  border-color: var(--color-brand-gold);
+  color: var(--color-brand-gold);
+}
+
+.btn-outline-gold {
+  background-color: transparent;
+  border: 2px solid var(--color-brand-gold);
+  color: var(--color-brand-gold);
+}
+
+.btn-outline-gold:hover {
+  background-color: var(--color-brand-gold);
+  color: white;
 }
 
 /* Card styles - ConnectCPA inspired with soft shadows */
@@ -373,4 +467,9 @@ select:focus {
   padding: 2.5rem;
   color: white;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Force white text for location CTA headings */
+.location-cta-heading {
+  color: white !important;
 }

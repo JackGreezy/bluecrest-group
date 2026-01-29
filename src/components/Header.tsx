@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { services } from "@/data/services";
 import { locations } from "@/data/locations";
@@ -22,7 +23,7 @@ export default function Header() {
   };
 
   const handleServicesLeave = () => {
-    servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 150);
+    servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 300);
   };
 
   const handleLocationsEnter = () => {
@@ -32,7 +33,7 @@ export default function Header() {
   };
 
   const handleLocationsLeave = () => {
-    locationsTimeoutRef.current = setTimeout(() => setLocationsOpen(false), 150);
+    locationsTimeoutRef.current = setTimeout(() => setLocationsOpen(false), 300);
   };
 
   useEffect(() => {
@@ -71,9 +72,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-3xl font-bold text-gray-800 tracking-tight">
-              BlueCrest<span className="text-[var(--color-brand-blue)] font-normal text-xl">Group</span>
-            </span>
+            <Image
+              src="/images/bluecrest-group-logo.png"
+              alt={`${siteConfig.businessName} Logo`}
+              width={200}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -87,14 +93,16 @@ export default function Header() {
 
             {/* Services Dropdown */}
             <div
-              className="relative"
+              className="relative group"
               onMouseEnter={handleServicesEnter}
               onMouseLeave={handleServicesLeave}
             >
               <button
-                className="text-gray-600 hover:text-[var(--color-brand-blue)] font-medium transition-colors inline-flex items-center gap-1"
+                type="button"
+                className="text-gray-600 hover:text-[var(--color-brand-blue)] font-medium transition-colors inline-flex items-center gap-1 py-2"
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
+                onClick={() => setServicesOpen(!servicesOpen)}
               >
                 Services
                 <svg
@@ -107,48 +115,60 @@ export default function Header() {
                 </svg>
               </button>
 
-              {servicesOpen && (
-                <div className="absolute top-full left-0 pt-2">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-4 min-w-[320px]">
-                    <div className="px-4 pb-3 border-b border-gray-100">
-                      <span className="text-xs font-semibold text-[var(--color-brand-blue)] uppercase tracking-wider">
-                        Our Services
-                      </span>
-                    </div>
-                    <div className="py-2">
-                      {topServices.map((service) => (
-                        <Link
-                          key={service.slug}
-                          href={`/services/${service.slug}`}
-                          className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[var(--color-brand-blue)] transition-colors"
-                        >
-                          {service.name}
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="px-4 pt-3 border-t border-gray-100">
+              {/* Invisible bridge to prevent hover gap issues */}
+              <div 
+                className={`absolute top-full left-0 w-full h-4 ${servicesOpen ? 'block' : 'hidden'}`}
+                onMouseEnter={handleServicesEnter}
+              />
+
+              <div 
+                className={`absolute top-full left-0 pt-2 transition-all duration-200 ${servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'}`}
+                onMouseEnter={handleServicesEnter}
+                onMouseLeave={handleServicesLeave}
+              >
+                <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-4 min-w-[320px]">
+                  <div className="px-4 pb-3 border-b border-gray-100">
+                    <span className="text-xs font-semibold text-[var(--color-brand-blue)] uppercase tracking-wider">
+                      Our Services
+                    </span>
+                  </div>
+                  <div className="py-2">
+                    {topServices.map((service) => (
                       <Link
-                        href="/services"
-                        className="text-sm font-semibold text-[var(--color-brand-blue)] hover:underline"
+                        key={service.slug}
+                        href={`/services/${service.slug}`}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[var(--color-brand-blue)] transition-colors"
+                        onClick={() => setServicesOpen(false)}
                       >
-                        View All {services.length} Services
+                        {service.name}
                       </Link>
-                    </div>
+                    ))}
+                  </div>
+                  <div className="px-4 pt-3 border-t border-gray-100">
+                    <Link
+                      href="/services"
+                      className="text-sm font-semibold text-[var(--color-brand-blue)] hover:underline"
+                      onClick={() => setServicesOpen(false)}
+                    >
+                      View All {services.length} Services
+                    </Link>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Locations Dropdown */}
             <div
-              className="relative"
+              className="relative group"
               onMouseEnter={handleLocationsEnter}
               onMouseLeave={handleLocationsLeave}
             >
               <button
-                className="text-gray-600 hover:text-[var(--color-brand-blue)] font-medium transition-colors inline-flex items-center gap-1"
+                type="button"
+                className="text-gray-600 hover:text-[var(--color-brand-blue)] font-medium transition-colors inline-flex items-center gap-1 py-2"
                 aria-expanded={locationsOpen}
                 aria-haspopup="true"
+                onClick={() => setLocationsOpen(!locationsOpen)}
               >
                 Service Areas
                 <svg
@@ -161,36 +181,46 @@ export default function Header() {
                 </svg>
               </button>
 
-              {locationsOpen && (
-                <div className="absolute top-full left-0 pt-2">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-4 min-w-[280px]">
-                    <div className="px-4 pb-3 border-b border-gray-100">
-                      <span className="text-xs font-semibold text-[var(--color-brand-blue)] uppercase tracking-wider">
-                        Areas We Serve
-                      </span>
-                    </div>
-                    <div className="py-2">
-                      {topLocations.map((location) => (
-                        <Link
-                          key={location.slug}
-                          href={`/service-areas/${location.slug}`}
-                          className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[var(--color-brand-blue)] transition-colors"
-                        >
-                          {location.name}, {location.stateAbbr}
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="px-4 pt-3 border-t border-gray-100">
+              {/* Invisible bridge to prevent hover gap issues */}
+              <div 
+                className={`absolute top-full left-0 w-full h-4 ${locationsOpen ? 'block' : 'hidden'}`}
+                onMouseEnter={handleLocationsEnter}
+              />
+
+              <div 
+                className={`absolute top-full left-0 pt-2 transition-all duration-200 ${locationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'}`}
+                onMouseEnter={handleLocationsEnter}
+                onMouseLeave={handleLocationsLeave}
+              >
+                <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-4 min-w-[280px]">
+                  <div className="px-4 pb-3 border-b border-gray-100">
+                    <span className="text-xs font-semibold text-[var(--color-brand-blue)] uppercase tracking-wider">
+                      Areas We Serve
+                    </span>
+                  </div>
+                  <div className="py-2">
+                    {topLocations.map((location) => (
                       <Link
-                        href="/service-areas"
-                        className="text-sm font-semibold text-[var(--color-brand-blue)] hover:underline"
+                        key={location.slug}
+                        href={`/service-areas/${location.slug}`}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[var(--color-brand-blue)] transition-colors"
+                        onClick={() => setLocationsOpen(false)}
                       >
-                        View All {locations.length} Service Areas
+                        {location.name}, {location.stateAbbr}
                       </Link>
-                    </div>
+                    ))}
+                  </div>
+                  <div className="px-4 pt-3 border-t border-gray-100">
+                    <Link
+                      href="/service-areas"
+                      className="text-sm font-semibold text-[var(--color-brand-blue)] hover:underline"
+                      onClick={() => setLocationsOpen(false)}
+                    >
+                      View All {locations.length} Service Areas
+                    </Link>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             <Link
@@ -205,7 +235,7 @@ export default function Header() {
           <div className="hidden md:block">
             <Link
               href="/contact"
-              className="gradient-blue text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="btn-primary px-8 py-3 rounded-full font-semibold"
             >
               Connect Today
             </Link>
@@ -233,8 +263,8 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100">
-          <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="md:hidden bg-white border-t border-gray-100 max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain">
+          <div className="max-w-7xl mx-auto px-6 py-4 pb-6">
             <nav className="flex flex-col gap-2">
               <Link
                 href="/"

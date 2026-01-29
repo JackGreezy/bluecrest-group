@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import ContactForm from "@/components/ContactForm";
 
@@ -13,30 +14,40 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/images/contact-fractional-cfo-orange-county-ca.jpeg"
+            alt="Contact BlueCrest Group for fractional CFO services in Orange County, CA"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70"></div>
+        </div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
         <div className="container-site relative z-10">
           <nav className="mb-8 text-sm">
-            <ol className="flex items-center gap-2 text-gray-500">
+            <ol className="flex items-center gap-2 text-gray-300">
               <li>
-                <Link href="/" className="hover:text-[var(--color-brand-blue)] transition-colors">Home</Link>
+                <Link href="/" className="hover:text-[var(--color-brand-gold)] transition-colors">Home</Link>
               </li>
               <li>/</li>
-              <li className="text-gray-900 font-medium">Contact</li>
+              <li className="text-white font-medium">Contact</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
+            <span className="inline-block text-[var(--color-brand-gold)] font-semibold text-sm tracking-wide uppercase mb-4">
               Get in Touch
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Let&apos;s Start a{" "}
-              <span className="text-[var(--color-brand-blue)]">Conversation</span>
+              <span className="text-[var(--color-brand-gold)]">Conversation</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-100 leading-relaxed">
               Ready to discuss how BlueCrest Group can support your business?
               Schedule a free consultation or reach out directly.
             </p>

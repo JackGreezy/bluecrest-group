@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 import { services, serviceCategories } from "@/data/services";
+import { getServiceIcon } from "@/utils/service-icons";
 
 export const metadata: Metadata = {
   title: `Financial Services | Fractional CFO and Accounting`,
@@ -13,30 +14,30 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
         <div className="container-site relative z-10">
           <nav className="mb-8 text-sm">
-            <ol className="flex items-center gap-2 text-gray-500">
+            <ol className="flex items-center gap-2 !text-white/80">
               <li>
-                <Link href="/" className="hover:text-[var(--color-brand-blue)] transition-colors">Home</Link>
+                <Link href="/" className="!text-white/80 hover:!text-white transition-colors">Home</Link>
               </li>
-              <li>/</li>
-              <li className="text-gray-900 font-medium">Services</li>
+              <li className="!text-white/80">/</li>
+              <li className="!text-white font-medium">Services</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
+            <span className="inline-block !text-white font-semibold text-sm tracking-wide uppercase mb-4">
               Our Services
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6">
               Financial Services for{" "}
-              <span className="text-[var(--color-brand-blue)]">Growing Businesses</span>
+              <span className="text-[var(--color-brand-gold)]">Growing Businesses</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl !text-white/90 leading-relaxed">
               From day-to-day accounting operations to strategic CFO advisory, we provide the
               financial expertise your business needs to thrive. Every service is tailored to
               your specific needs and growth stage.
@@ -69,9 +70,7 @@ export default function ServicesPage() {
                       className="group bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 shadow-soft hover:shadow-lg hover:border-[var(--color-brand-blue)]/30 transition-all"
                     >
                       <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-blue)] to-[var(--color-brand-navy)] rounded-xl flex items-center justify-center mb-5">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
+                        {getServiceIcon(service.slug)}
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-brand-blue)] transition-colors">
                         {service.name}

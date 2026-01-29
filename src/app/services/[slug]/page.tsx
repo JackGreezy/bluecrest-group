@@ -46,34 +46,34 @@ export default async function ServicePage({ params }: Props) {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
         <div className="container-site relative z-10">
           <nav className="mb-8 text-sm">
-            <ol className="flex items-center gap-2 text-gray-500">
+            <ol className="flex items-center gap-2 !text-white/80">
               <li>
-                <Link href="/" className="hover:text-[var(--color-brand-blue)] transition-colors">Home</Link>
+                <Link href="/" className="!text-white/80 hover:!text-white transition-colors">Home</Link>
               </li>
-              <li>/</li>
+              <li className="!text-white/80">/</li>
               <li>
-                <Link href="/services" className="hover:text-[var(--color-brand-blue)] transition-colors">Services</Link>
+                <Link href="/services" className="!text-white/80 hover:!text-white transition-colors">Services</Link>
               </li>
-              <li>/</li>
-              <li className="text-gray-900 font-medium">{service.name}</li>
+              <li className="!text-white/80">/</li>
+              <li className="!text-white font-medium">{service.name}</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
+            <span className="inline-block !text-white font-semibold text-sm tracking-wide uppercase mb-4">
               Our Services
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6">
               {service.name} in{" "}
-              <span className="text-[var(--color-brand-blue)]">{siteConfig.city}, {siteConfig.stateAbbr}</span>
+              <span className="text-[var(--color-brand-gold)]">{siteConfig.city}, {siteConfig.stateAbbr}</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl !text-white/90 leading-relaxed mb-8">
               {service.shortDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -285,7 +285,7 @@ export default async function ServicePage({ params }: Props) {
 
         <div className="container-site relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" style={{ color: 'white' }}>
               Ready to Get Started With {service.name}?
             </h2>
             <p className="text-xl text-gray-400 mb-8">

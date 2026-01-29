@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
-import { locations, getPrimaryLocation, getLocationsByPopulation } from "@/data/locations";
+import { locations, getPrimaryLocation, getLocationsByPopulation, getLocationImagePath } from "@/data/locations";
 import { services } from "@/data/services";
+import { getServiceIcon } from "@/utils/service-icons";
 
 export const metadata: Metadata = {
   title: `Service Areas | ${siteConfig.name}`,
@@ -18,30 +20,40 @@ export default function ServiceAreasPage() {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Orange-County-CA-fractional-cfo.jpg"
+            alt="Orange County, California"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70"></div>
+        </div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
         <div className="container-site relative z-10">
           <nav className="mb-8 text-sm">
-            <ol className="flex items-center gap-2 text-gray-500">
+            <ol className="flex items-center gap-2 !text-white/80">
               <li>
-                <Link href="/" className="hover:text-[var(--color-brand-blue)] transition-colors">Home</Link>
+                <Link href="/" className="!text-white/80 hover:!text-white transition-colors">Home</Link>
               </li>
-              <li>/</li>
-              <li className="text-gray-900 font-medium">Service Areas</li>
+              <li className="!text-white/80">/</li>
+              <li className="!text-white font-medium">Service Areas</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
+            <span className="inline-block text-[var(--color-brand-gold)] font-semibold text-sm tracking-wide uppercase mb-4">
               Where We Work
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Orange County{" "}
-              <span className="text-[var(--color-brand-blue)]">Financial Services</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="!text-white">Orange County</span>{" "}
+              <span className="text-[var(--color-brand-gold)]">Financial Services</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl !text-white/90 leading-relaxed mb-8">
               BlueCrest Group provides fractional CFO, accounting, and business advisory
               services to businesses throughout Orange County, California. From our base
               in {primaryLocation.name}, we serve companies across the region with
@@ -56,7 +68,7 @@ export default function ServiceAreasPage() {
               </Link>
               <a
                 href={`tel:${siteConfig.phoneRaw}`}
-                className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-gray-200 text-gray-900 rounded-full font-semibold hover:border-[var(--color-brand-blue)] hover:text-[var(--color-brand-blue)] transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white/10 transition-colors"
               >
                 Call {siteConfig.phone}
               </a>
@@ -87,27 +99,36 @@ export default function ServiceAreasPage() {
               <Link
                 key={location.slug}
                 href={`/service-areas/${location.slug}`}
-                className="group bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 shadow-soft hover:shadow-lg hover:border-[var(--color-brand-blue)]/30 transition-all"
+                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-soft hover:shadow-lg hover:border-[var(--color-brand-blue)]/30 transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--color-brand-blue)] transition-colors">
-                    {location.name}
-                  </h3>
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={getLocationImagePath(location)}
+                    alt={`${location.name}, ${location.stateAbbr}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                   {location.isPrimary && (
-                    <span className="bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="absolute top-4 right-4 bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white text-xs font-bold px-3 py-1 rounded-full">
                       HQ
                     </span>
                   )}
                 </div>
-                <p className="text-gray-600 text-sm mb-5">
-                  {location.shortDescription}
-                </p>
-                <span className="inline-flex items-center gap-2 text-[var(--color-brand-blue)] font-semibold text-sm">
-                  Learn more
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
+                <div className="p-6 lg:p-8">
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--color-brand-blue)] transition-colors mb-3">
+                    {location.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-5">
+                    {location.shortDescription}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-[var(--color-brand-blue)] font-semibold text-sm">
+                    Learn more
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
@@ -137,9 +158,7 @@ export default function ServiceAreasPage() {
                 className="group bg-white rounded-2xl p-6 lg:p-8 shadow-soft border border-gray-100 hover:shadow-lg hover:border-[var(--color-brand-blue)]/30 transition-all"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-blue)] to-[var(--color-brand-navy)] rounded-xl flex items-center justify-center mb-5">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+                  {getServiceIcon(service.slug)}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[var(--color-brand-blue)] transition-colors">
                   {service.name}
@@ -194,7 +213,7 @@ export default function ServiceAreasPage() {
             <div className="bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 rounded-3xl p-8 lg:p-10 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-40 h-40 bg-[var(--color-brand-blue)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
 
-              <h3 className="text-2xl font-bold mb-8">Benefits of Local Partnership</h3>
+              <h3 className="text-2xl font-bold text-white mb-8" style={{ color: 'white' }}>Benefits of Local Partnership</h3>
               <ul className="space-y-5">
                 <li className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] rounded-full flex items-center justify-center shrink-0">

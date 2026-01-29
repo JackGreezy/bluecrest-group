@@ -14,6 +14,8 @@ const poppins = Poppins({
   display: "swap",
 });
 
+// Harabara Mais Demo font loaded via CDN in head tag below
+
 export const metadata: Metadata = {
   title: {
     default: `${siteConfig.businessName} | Fractional CFO and Accounting Services in ${siteConfig.city}, ${siteConfig.stateAbbr}`,
@@ -31,6 +33,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteConfig.businessName }],
   creator: siteConfig.businessName,
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -57,6 +62,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <head>
+        {/* Harabara Mais Demo - Brand headline font */}
+        <link
+          href="https://fonts.cdnfonts.com/css/harabara-mais-demo"
+          rel="stylesheet"
+        />
         <OrganizationSchema />
         <LocalBusinessSchema />
       </head>

@@ -174,3 +174,24 @@ export function getLocationsByPopulation(limit?: number): Location[] {
   const sorted = [...locations].sort((a, b) => (b.population || 0) - (a.population || 0));
   return limit ? sorted.slice(0, limit) : sorted;
 }
+
+// Map of location slugs to their image file extensions
+const locationImageExtensions: Record<string, string> = {
+  "newport-beach-ca": "webp",
+  "irvine-ca": "jpg",
+  "costa-mesa-ca": "jpg",
+  "huntington-beach-ca": "jpg",
+  "laguna-beach-ca": "jpg",
+  "orange-ca": "jpg",
+  "santa-ana-ca": "jpg",
+  "anaheim-ca": "webp",
+  "fullerton-ca": "jpg",
+  "tustin-ca": "avif",
+  "mission-viejo-ca": "avif",
+  "lake-forest-ca": "jpg",
+};
+
+export function getLocationImagePath(location: Location): string {
+  const extension = locationImageExtensions[location.slug] || "jpg";
+  return `/images/${location.slug}/fractional-cfo-${location.slug}.${extension}`;
+}

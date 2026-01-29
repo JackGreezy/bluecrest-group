@@ -13,30 +13,40 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-[var(--color-brand-blue)]/10"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/about-bluecrest-group-fractional-cfo.avif"
+            alt="About BlueCrest Group - Fractional CFO Services"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70"></div>
+        </div>
         <div className="absolute top-20 right-20 w-72 h-72 bg-[var(--color-brand-blue)]/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-navy)]/15 rounded-full blur-3xl"></div>
 
         <div className="container-site relative z-10">
           <nav className="mb-8 text-sm">
-            <ol className="flex items-center gap-2 text-gray-500">
+            <ol className="flex items-center gap-2 text-gray-300">
               <li>
-                <Link href="/" className="hover:text-[var(--color-brand-blue)] transition-colors">Home</Link>
+                <Link href="/" className="hover:text-[var(--color-brand-gold)] transition-colors">Home</Link>
               </li>
               <li>/</li>
-              <li className="text-gray-900 font-medium">About</li>
+              <li className="text-white font-medium">About</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
+            <span className="inline-block text-[var(--color-brand-gold)] font-semibold text-sm tracking-wide uppercase mb-4">
               About Us
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6">
               Strategic Financial Leadership for{" "}
-              <span className="text-[var(--color-brand-blue)]">Growing Businesses</span>
+              <span className="text-[var(--color-brand-gold)]">Growing Businesses</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-100 leading-relaxed">
               We help companies in {siteConfig.region} build stronger financial foundations
               and make better decisions with expert fractional CFO and accounting services.
             </p>
@@ -194,77 +204,6 @@ export default function AboutPage() {
                 <p className="text-gray-600">{value.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why BlueCrest */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[var(--color-brand-blue)]/10 rounded-full blur-3xl"></div>
-
-        <div className="container-site relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block text-[var(--color-brand-blue)] font-semibold text-sm tracking-wide uppercase mb-4">
-              Why Choose Us
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Why Work With BlueCrest Group
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3">Executive-Level Expertise</h3>
-              <p className="text-gray-400">
-                Get the strategic financial leadership of a senior executive without
-                the cost of a full-time hire. Our team brings decades of combined
-                experience across industries.
-              </p>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3">Local Understanding</h3>
-              <p className="text-gray-400">
-                Based in {siteConfig.city}, we understand the {siteConfig.region} business
-                community. We can meet in person when needed and provide the responsive
-                service local businesses deserve.
-              </p>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3">Flexible Engagement</h3>
-              <p className="text-gray-400">
-                Our services scale to your needs. Start with what you need today and
-                add capabilities as you grow. No long-term contracts or unnecessary
-                overhead.
-              </p>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3">True Partnership</h3>
-              <p className="text-gray-400">
-                We invest in understanding your business and goals. Our success is
-                measured by your results, not by hours billed or reports generated.
-              </p>
-            </div>
           </div>
         </div>
       </section>

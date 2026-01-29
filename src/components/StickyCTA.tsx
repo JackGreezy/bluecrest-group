@@ -14,7 +14,7 @@ export default function StickyCTA() {
         {isMinimized ? (
           <button
             onClick={() => setIsMinimized(false)}
-            className="bg-gradient-to-r from-[var(--color-brand-blue)] to-[var(--color-brand-navy)] text-white p-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+            className="bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white p-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
             aria-label="Open contact options"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,19 +33,19 @@ export default function StickyCTA() {
               </svg>
             </button>
             <div className="text-center mb-5">
-              <p className="font-bold text-gray-900">Ready to talk?</p>
+              <p className="font-bold text-[var(--color-brand-navy)]">Ready to talk?</p>
               <p className="text-sm text-gray-500">Schedule your free consultation</p>
             </div>
             <div className="space-y-3">
               <Link
                 href="/contact"
-                className="flex items-center justify-center w-full px-6 py-3 bg-[var(--color-brand-blue)] text-white rounded-full font-semibold text-sm hover:bg-[var(--color-blue-dark)] transition-colors"
+                className="flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-[var(--color-brand-gold)] to-[var(--color-gold-dark)] text-white rounded-full font-semibold text-sm hover:shadow-lg transition-all"
               >
                 Get a Free Consultation
               </Link>
               <a
                 href={`tel:${siteConfig.phoneRaw}`}
-                className="flex items-center justify-center w-full px-6 py-3 bg-white border-2 border-gray-200 text-gray-900 rounded-full font-semibold text-sm hover:border-[var(--color-brand-blue)] hover:text-[var(--color-brand-blue)] transition-colors"
+                className="flex items-center justify-center w-full px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-full font-semibold text-sm hover:border-[var(--color-brand-gold)] hover:text-[var(--color-brand-gold)] transition-colors"
               >
                 Call {siteConfig.phone}
               </a>
@@ -59,7 +59,7 @@ export default function StickyCTA() {
         <div className="grid grid-cols-2 divide-x divide-gray-200">
           <a
             href={`tel:${siteConfig.phoneRaw}`}
-            className="flex items-center justify-center gap-2 py-4 text-[var(--color-brand-blue)] font-semibold"
+            className="flex items-center justify-center gap-2 py-4 text-[var(--color-brand-navy)] font-semibold"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -68,7 +68,7 @@ export default function StickyCTA() {
           </a>
           <Link
             href="/contact"
-            className="flex items-center justify-center gap-2 py-4 bg-[var(--color-brand-blue)] text-white font-semibold"
+            className="flex items-center justify-center gap-2 py-4 bg-[var(--color-brand-gold)] text-white font-semibold"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
