@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${service.name} in ${siteConfig.city}, ${siteConfig.stateAbbr}`,
-    description: `${service.shortDescription} Professional ${service.name.toLowerCase()} services for businesses in ${siteConfig.city}, ${siteConfig.stateAbbr} and ${siteConfig.region}.`,
+    title: `${service.name} in ${siteConfig.region}, ${siteConfig.stateAbbr}`,
+    description: `${service.shortDescription} Professional ${service.name.toLowerCase()} services for businesses in ${siteConfig.region}, ${siteConfig.stateAbbr}.`,
   };
 }
 
@@ -71,7 +71,7 @@ export default async function ServicePage({ params }: Props) {
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6">
               {service.name} in{" "}
-              <span className="text-[var(--color-brand-gold)]">{siteConfig.city}, {siteConfig.stateAbbr}</span>
+              <span className="text-[var(--color-brand-gold)]">{siteConfig.region}, {siteConfig.stateAbbr}</span>
             </h1>
             <p className="text-xl !text-white/90 leading-relaxed mb-8">
               {service.shortDescription}
